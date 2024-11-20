@@ -1,0 +1,7 @@
+{
+  "name": "deliveryRoutesMobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
