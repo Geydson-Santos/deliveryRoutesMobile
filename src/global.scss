@@ -35,3 +35,50 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+.form {
+    gap: 5vh
+}
+
+.flexContainer {
+    flex: 1; 
+    align-content: center;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1vh;
+
+    &.flex-column {
+        flex-direction: column;
+    }
+
+    &.flex-row {
+        flex-direction: row;
+    }
+
+    &.right {
+        justify-content: right;
+    }
+}
+
+
+.ion-button {
+    min-height: 3rem;
+    min-width: 90%;
+}
+
+.button-native {
+    --border-radius: 20px;
+    border-radius: 20px;
+}
+
+@for $i from 1 through 10 {
+    .gap-#{$i} {
+        gap: #{$i}vh
+    }
+}
