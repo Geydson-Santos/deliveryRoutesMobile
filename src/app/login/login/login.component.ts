@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonInput, IonItem, IonList, IonButton, IonInputPasswordToggle, IonLabel, IonButtons, IonBackButton, IonNav, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline } from 'ionicons/icons';
@@ -10,7 +11,7 @@ import { arrowBackOutline } from 'ionicons/icons';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [RouterLink, IonIcon, IonNav, IonBackButton, IonButtons, IonLabel, FormsModule, ReactiveFormsModule, IonInput, IonItem, IonList, IonCard, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton, IonInputPasswordToggle]
+  imports: [ButtonModule, RouterLink, IonIcon, IonNav, IonBackButton, IonButtons, IonLabel, FormsModule, ReactiveFormsModule, IonInput, IonItem, IonList, IonCard, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton, IonInputPasswordToggle]
 })
 export class LoginComponent implements OnInit {
 
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   senha: string = "";
 
   constructor() { 
-    addIcons({ arrowBackOutline});
+    addIcons({ arrowBackOutline });
   }
 
   ngOnInit() {}

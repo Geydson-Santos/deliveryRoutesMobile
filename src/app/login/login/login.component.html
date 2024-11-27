@@ -8,15 +8,17 @@
   <ion-list style="display: grid;" class="gap-2 ion-padding">
     <ion-title style="text-align: center;">Login</ion-title>
     <ion-item>
-      <ion-input labelPlacement="floating" label="Usuário" required="true" (input)="setValue('usuario', $event.target)" [value]="usuario"></ion-input>
+      <ion-input labelPlacement="floating" label="Usuário" required="true"  [(ngModel)]="usuario"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" labelPlacement="floating" label="Senha" (input)="setValue('senha', $event.target)" [value]="senha">
+      <ion-input type="password" labelPlacement="floating" label="Senha" [(ngModel)]="senha">
         @if(senha.length > 0) {
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         }
       </ion-input>
     </ion-item>
+    
+    <p-button class="p-button">Entrar</p-button>
     <!--<div class="flex right">
       <ion-label color="primary" style="font-size: 0.9rem;">Esqueceu sua senha?</ion-label>
     </div>-->
