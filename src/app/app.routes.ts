@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { LoginModule } from './login/login.module';
-import { HomePage } from './home/home.page';
+import { LoginModule } from './modules/login/login.module';
+import { HomePage } from './modules/home/home.page';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},

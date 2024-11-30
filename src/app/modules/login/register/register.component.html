@@ -1,0 +1,44 @@
+<div class="ion-padding" style="position: absolute;">
+  <a routerLink="/">
+    <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
+  </a>
+</div>
+
+<div class="ion-padding flexContainer">
+  <ion-list style="display: grid;" class="gap-2 ion-padding">
+    <ion-title style="text-align: center;">Criar Usuário</ion-title>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Nome" required="true"  [(ngModel)]="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="CPF" required="true"  [(ngModel)]="cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="E-mail" required="true"  [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Usuário" required="true"  [(ngModel)]="usuario"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" labelPlacement="floating" required="true"  label="Senha" [(ngModel)]="senha">
+        @if(senha.length > 0) {
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        }
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select label="Tipo de Permissão" placeholder="Selecione uma permissão">
+        <ion-select-option *ngFor="let role of roles" value={{role.value}}>{{role.label}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!--<div class="flex right">
+      <ion-label color="primary" style="font-size: 0.9rem;">Esqueceu sua senha?</ion-label>
+    </div>-->
+    <div class="flex">
+      <ion-button class="ion-button" slot="center" (click)="register()">
+        <svg *ngIf="loading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="25" height="25" style="shape-rendering: auto; display: block; background: rgba(255, 245, 245, 0);"><g data-idx="1"><circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10" stroke="#ffffff" fill="none" cy="50" cx="50" data-idx="2"></circle><g data-idx="4"></g></g><text data-watermark="true" text-anchor="middle" dominant-baseline="middle" stroke-opacity="0.1" fill="black" fill-opacity="0.1" stroke="white" stroke-width="1" font-size="5.0" x="50" y="50" data-idx="5" style="opacity: 1; font-size: 5px;"></text></svg>
+        <span *ngIf="!loading">Registrar</span>
+      </ion-button>
+    </div>
+  </ion-list>
+</div>
