@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonContent, IonButton } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {} from 'googlemaps';
+//import {} from 'googlemaps';
 //import { GoogleMap } from '@capacitor/google-maps';
 
 @Component({
