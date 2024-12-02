@@ -5,7 +5,7 @@
     <p>Aplicativo de Entregas</p>
   </div>
   <div id="footer">
-    <a routerLink="/login">
+    <a routerLink="/login/login">
       <div class="flex">
         <ion-button class="ion-button">Entrar</ion-button>
       </div>
@@ -16,5 +16,6 @@
       </div>
     </a>
   </div>
-  <capacitor-google-map id="map"></capacitor-google-map>
+  <ion-toast [isOpen]="toastOpen" [message]="errorMessage" [duration]="5000" (didDismiss)="openToastError(false)"></ion-toast>
+  <!--<capacitor-google-map id="map"></capacitor-google-map>-->
 </ion-content>

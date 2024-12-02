@@ -3,7 +3,6 @@
     <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
   </a>
 </div>
-
 <div class="ion-padding flexContainer">
   <ion-list style="display: grid;" class="gap-2 ion-padding">
     <ion-title style="text-align: center;">Login</ion-title>
@@ -11,7 +10,7 @@
       <ion-input labelPlacement="floating" label="Usuário" required="true" [(ngModel)]="usuario"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" labelPlacement="floating" label="Senha" required="true"  [(ngModel)]="senha">
+      <ion-input type="password" labelPlacement="floating" label="Senha" required="true" [(ngModel)]="senha">
         @if(senha.length > 0) {
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         }
@@ -28,3 +27,5 @@
     </div>
   </ion-list>
 </div>
+
+<ion-toast [isOpen]="errorLogin" [message]="errorMessage" [duration]="5000" (didDismiss)="openToastError(false)"></ion-toast>

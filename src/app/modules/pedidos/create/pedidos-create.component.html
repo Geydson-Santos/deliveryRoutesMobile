@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pedir uma marmita</ion-title>
+    <ion-buttons slot="start">
+      <a routerLink="/home">
+        <ion-button>
+          <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
+        </ion-button>
+      </a>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list style="display: grid;" class="gap-2 ion-padding">
+    <ion-item>
+      <ion-input labelPlacement="floating" label="CEP" maxlength="8" [(ngModel)]="cep" (ionInput)="viaCep()" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Bairro" [(ngModel)]="bairro" (ionInput)="calcularEnderecoCompleto()" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Rua" required="true" [(ngModel)]="rua" (ionInput)="calcularEnderecoCompleto()" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Número" [(ngModel)]="numero" (ionInput)="calcularEnderecoCompleto()" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Complemento" required="true" [(ngModel)]="complemento" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Referência" required="true" [(ngModel)]="referencia" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Cidade" required="true" [(ngModel)]="cidade" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Estado" required="true" [(ngModel)]="estado" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select label="Marmita" placeholder="Selecione uma marmita" required="true" label-placement="floating" (ionChange)="calcularValorTotal()" [(ngModel)]="marmitaSelecionadaId">
+        <ion-select-option *ngFor="let marmita of tiposDeMarmita" value={{marmita.id}}>{{marmita.nome}} - {{marmita.descricao}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Observação" [(ngModel)]="observacao" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" required="true" type="number" label="Quantidade" [(ngModel)]="quantidade" (ionInput)="calcularValorTotal()" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select label="Forma de Pagamento" placeholder="Selecione uma forma de pagamento" required="true" label-placement="floating" [(ngModel)]="pagamento">
+        <ion-select-option *ngFor="let formaDePagamento of formasPagamentos" value={{formaDePagamento.code}}>{{formaDePagamento.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="pagamento == 'DINHEIRO'">
+      <ion-input labelPlacement="floating" required="true" type="number" label="Troco" [(ngModel)]="troco" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input labelPlacement="floating" type="number" [disabled]="true" label="Valor Total" [value]="valorTotal" ></ion-input>
+    </ion-item>
+    <!--<div class="flex right">
+      <ion-label color="primary" style="font-size: 0.9rem;">Esqueceu sua senha?</ion-label>
+    </div>-->
+    <div class="flex">
+      <ion-button class="ion-button" slot="center" (click)="fazerPedido()">
+        <svg *ngIf="loading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="25" height="25" style="shape-rendering: auto; display: block; background: rgba(255, 245, 245, 0);"><g data-idx="1"><circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10" stroke="#ffffff" fill="none" cy="50" cx="50" data-idx="2"></circle><g data-idx="4"></g></g><text data-watermark="true" text-anchor="middle" dominant-baseline="middle" stroke-opacity="0.1" fill="black" fill-opacity="0.1" stroke="white" stroke-width="1" font-size="5.0" x="50" y="50" data-idx="5" style="opacity: 1; font-size: 5px;"></text></svg>
+        <span *ngIf="!loading">Enviar</span>
+      </ion-button>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-toast [isOpen]="error" [message]="errorMessage" [duration]="5000"></ion-toast>

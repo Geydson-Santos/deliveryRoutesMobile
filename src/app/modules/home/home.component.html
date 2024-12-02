@@ -1,0 +1,61 @@
+<ion-tabs>
+  <ion-tab tab="home">
+    <div id="home-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Pedidos</ion-title>
+          <ion-buttons slot="end">
+            <a routerLink="/pedidos/create">
+              <ion-button><ion-icon name="add" size="large"></ion-icon></ion-button>
+            </a>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <ion-refresher slot="fixed" (ionRefresh)="refreshPedidos($event)">
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+        <div class="flex">
+          <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+        </div>
+        <ion-list *ngIf="pedidos.length > 0">
+          <ion-item *ngFor="let pedido of pedidos">
+            <ion-label>
+              <h2>Marmita Padrão ({{pedido.quantidade}}) - {{pedido.valorTotalString}}</h2>
+              <p>Observação: {{pedido.obs}}</p>
+              <p>Endereço de Entrega: {{pedido.enderecoCompleto}}</p>
+              <p>Pedido realizado em: {{pedido.datahora}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab tab="menu">
+    <div id="menu-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <ion-list>
+          <ion-button fill="clear" expand="full">Endereços</ion-button>
+        </ion-list>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      Home
+    </ion-tab-button>
+    <ion-tab-button tab="menu">
+      <ion-icon name="menu"></ion-icon>
+      Menu
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

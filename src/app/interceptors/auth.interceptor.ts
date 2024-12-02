@@ -3,6 +3,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 const publicUrls = ['/users/all', '/users/register', '/authenticate'];
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+
   const isPublicUrl = publicUrls.some((url) => req.url.includes(url));
 
   if (isPublicUrl) {
@@ -10,7 +11,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const token = localStorage.getItem('token')?.replace(/"/g, '');
-  console.log(token);
 
   if (token) {
     const authReq = req.clone({

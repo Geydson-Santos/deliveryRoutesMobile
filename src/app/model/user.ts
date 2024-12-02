@@ -1,9 +1,11 @@
 export class User {
   public id?: any;
-  public role?: 'ROLE_USER' | 'ROLE_GERENTE' | 'ROLE_ADMIN';
   public username?: string;
-  public active?: boolean;
   public name?: string;
+  public cpf?: string;
+  public email?: string;
+  public active?: boolean;
+  public role?: 'ROLE_USER' | 'ROLE_GERENTE' | 'ROLE_ADMIN';
 
   constructor(user?: Partial<User>) {
     if (user) {

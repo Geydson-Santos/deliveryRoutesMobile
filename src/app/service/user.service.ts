@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import { User } from '../model/user';
 import { UserRegistration } from '../model/userRegistration';
 
@@ -8,7 +8,9 @@ import { UserRegistration } from '../model/userRegistration';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = "https://deliveryroutesbackend.up.railway.app";
+  baseUrl: string = "https://deliveryroutesbackend.up.railway.app";
+
+  usuarioAtual: User = new User();
 
   constructor(private _http: HttpClient) {}
 
@@ -17,7 +19,16 @@ export class UserService {
   }
 
   register(user: UserRegistration): Observable<User> {
-    return this._http.post<User>(`${this.baseUrl}/users/sign-up`, user);
+    return this._http.post<User>(`${this.baseUrl}/users/sign-up`, user).pipe(
+      tap((response) => {
+        if (response) {
+          let newObject = JSON.parse(JSON.stringify(response));
+
+          newObject.password = user.password;
+          localStorage.setItem('currentUser', JSON.stringify(newObject));
+        }
+      })
+    );
   }
 
   getUserByUsername(username: string): Observable<User> {

@@ -12,11 +12,13 @@ export class Pedido {
   public estado?: string;
   public pais?: string;
   public enderecoId?: number;
+  public datahora?: string;
   public marmitaId?: number;
   public obs?: string;
   public pagamento?: string;
   public troco?: number;
   public valorTotal?: number;
+  public valorTotalString?: string;
   public quantidade?: number;
   public latitude?: number;
   public longitude?: number;

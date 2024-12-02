@@ -27,7 +27,7 @@
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-select label="Tipo de Permissão" placeholder="Selecione uma permissão">
+      <ion-select label="Tipo de Permissão" placeholder="Selecione uma permissão" label-placement="floating" [(ngModel)]="tipoDePermissao">
         <ion-select-option *ngFor="let role of roles" value={{role.value}}>{{role.label}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -42,3 +42,5 @@
     </div>
   </ion-list>
 </div>
+
+<ion-toast [isOpen]="errorLogin" [message]="errorMessage" [duration]="5000"></ion-toast>

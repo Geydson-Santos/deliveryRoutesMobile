@@ -14,9 +14,9 @@ export class AuthService {
   baseUrl = "https://deliveryroutesbackend.up.railway.app";
 
   constructor(private http: HttpClient, private router: Router) {
-    const storedUser = localStorage.getItem('currentUser');
+    const storedUser = localStorage.getItem('token');
     if (storedUser) {
-      this.currentUserSubject.next(JSON.parse(storedUser));
+      this.currentUserSubject.next({token: storedUser});
     }
   }
 
@@ -43,29 +43,27 @@ export class AuthService {
             throw new Error('Resposta inválida do servidor');
           }
 
-          localStorage.setItem('currentUser', JSON.stringify(response));
+          //localStorage.setItem('currentUser', JSON.stringify(response));
           localStorage.setItem('token', JSON.stringify(response.token));
           this.currentUserSubject.next(response);
-
-          this.router.navigate(['/home']);
         }),
         catchError((error) => {
           if (error.status === 401) {
             console.error('Credenciais inválidas:', error);
-            alert('Usuário ou senha incorretos.');
+            throw new Error('Usuário ou senha incorretos.');
           } else if (error.status === 0) {
             console.error('Erro de conexão:', error);
-            alert(
+            throw new Error(
               'Não foi possível conectar ao servidor. Verifique sua conexão.'
             );
           } else if (error instanceof Error) {
             console.error('Erro na resposta do servidor:', error.message);
-            alert(`Erro inesperado: ${error.message}`);
+            throw new Error(`Erro inesperado: ${error.message}`);
           } else {
             console.error('Erro desconhecido:', error);
-            alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
+            throw new Error('Ocorreu um erro inesperado. Tente novamente mais tarde.');
           }
-          return throwError(() => error);
+          //return throwError(() => error);
         })
       );
   }
@@ -92,10 +90,15 @@ export class AuthService {
 
   isTokenExpired(): boolean {
     const token = this.authToken;
+    return this.verifyIsTokenExpired(token || "");
+  }
+
+  verifyIsTokenExpired(token: string): boolean {
     if (!token) return true;
 
     try {
-      const decoded: any = jwtDecode(token);
+      //const decoded: any = jwtDecode(token);
+      const decoded: any = JSON.parse(token.split(".")[0]);
       return decoded.exp * 1000 < Date.now();
     } catch {
       return true;
@@ -115,3 +118,4 @@ export class AuthService {
     return this.http.get<any>(`${this.baseUrl}/profile`, { headers });
   }
 }
+

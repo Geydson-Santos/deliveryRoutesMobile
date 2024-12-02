@@ -8,7 +8,7 @@ import {
   IonInputPasswordToggle,
   IonItem, IonLabel,
   IonList, IonSelect, IonSelectOption,
-  IonTitle
+  IonTitle, IonToast
 } from "@ionic/angular/standalone";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -27,9 +27,13 @@ interface RoleOption {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   standalone: true,
-  imports: [ButtonModule, RouterLink, IonIcon, FormsModule, ReactiveFormsModule, IonInput, IonItem, IonList, IonTitle, IonInput, IonButton, IonInputPasswordToggle, NgIf, IonSelect, NgForOf, IonSelectOption, IonLabel]
+  imports: [ButtonModule, RouterLink, IonIcon, FormsModule, ReactiveFormsModule, IonInput, IonItem, IonList, IonTitle, IonInput, IonButton, IonInputPasswordToggle, NgIf, IonSelect, NgForOf, IonSelectOption, IonLabel, IonToast]
 })
 export class RegisterComponent  implements OnInit {
+
+  errorLogin: boolean = false;
+
+  errorMessage: string = "";
 
   nome: string = "";
 
@@ -60,15 +64,22 @@ export class RegisterComponent  implements OnInit {
   }
 
   register() {
-    this.loading = true;
-    this.userService.register(new UserRegistration({name: this.nome, role: this.tipoDePermissao, username: this.usuario, password: this.senha})).subscribe({
-      next: () => {
-        this.router.navigate(['/sign-in']);
-      },
-      error: (error) => {
-        this.loading = false;
-      },
-    });
+    if(this.nome != "" && this.cpf != "" && this.email != "" && this.tipoDePermissao != undefined && this.usuario != "" && this.senha != ""){
+      this.loading = true;
+      this.userService.register(new UserRegistration({name: this.nome, cpf: this.cpf, email: this.email, role: this.tipoDePermissao, username: this.usuario, password: this.senha})).subscribe({
+        next: (usuario) => {
+          this.router.navigate(['/login/login']);
+        },
+        error: (error) => {
+          this.errorMessage = 'Falha ao cadastrar o usuário. Verifique seus dados e tente novamente.';
+          this.errorLogin = true;
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
+        }
+      });
+    }
   }
 
 }
